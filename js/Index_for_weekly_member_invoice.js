@@ -1,31 +1,24 @@
-const { createInvoice } = require("./Type_of_Report");
+/*
+    1.  Let's import the easy-invoice library, so we can use it.
+    2.  Let's import the built-in NodeJS fs library,
+        so we can interact with the file system to save our invoice
+*/
+const easyinvoice = require('easyinvoice');
+const fs = require('fs');
 
-const invoice = {
-    shipping: {
-        name: "John Doe",
-        address: "1234 Main Street",
-        city: "San Francisco",
-        state: "CA",
-        country: "US",
-        postal_code: 94111
-    },
-    items: [
-        {
-            item: "TC 100",
-            description: "Toner Cartridge",
-            quantity: 2,
-            amount: 6000
-        },
-        {
-            item: "USB_EXT",
-            description: "USB Cable Extender",
-            quantity: 1,
-            amount: 2000
-        }
-    ],
-    subtotal: 8000,
-    paid: 0,
-    invoice_nr: 1234
-};
+/*
+    3.  Let's create a data object.
+        This object will contain all the data we would like to be visible on our invoice.
+        We will add data later in our demo.
+*/
+const data = {};
 
-createInvoice (invoice, "invoice.pdf");
+//  4.    Let's use the EasyInvoice library and call the "createInvoice" function
+easyinvoice.createInvoice(data, function (result) {
+    /*
+        5.  The 'result' variable will contain our invoice as a base64 encoded PDF
+            Now let's save our invoice to our local filesystem, so we can have a look!
+            We will be using the 'fs' library we imported above for this.
+    */
+    fs.writeFileSync("invoice.pdf", result.pdf, 'base64');
+});
