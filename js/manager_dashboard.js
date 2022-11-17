@@ -22,7 +22,7 @@ manager_dashboard.call = () => {
                 label: 'REQUEST SUMMARY OF SERVICE',
                 className: 'btn-info',
                 callback: () => {
-                    Type_of_Report.call(Type_of_Report)
+                    Type_of_Report.call()
                 }
             },
             c: {
